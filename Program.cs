@@ -29,20 +29,6 @@ app.MapGet("/pizzas/{id}", (int id) => PizzaDB.GetPizza(id));
 app.MapGet("/pizzas", () => PizzaDB.GetPizzas());
 app.MapPost("/pizzas", (Pizza pizza) 
     => PizzaDB.IsValid(pizza) ? Results.Ok(PizzaDB.CreatePizza(pizza)) : Results.BadRequest() );
-//app.MapPost("/pizzas", async (HttpContext context) => 
-//{
-//    Pizza? pizza = JsonSerializer.Deserialize<Pizza>(context.Request.Body);
-//    if (pizza == null) Results.BadRequest("Invalid Body");
-//    try
-//    {
-//        Pizza result = PizzaDB.CreatePizza(pizza);
-//        string? res = JsonSerializer.Serialize(result);
-//        context.Response.WriteAsJsonAsync(res);
-//    } catch (Exception ex)
-//    {
-//        Results.BadRequest(ex.Message);
-//    }
-//});
 app.MapPut("/pizzas", (Pizza pizza) => PizzaDB.UpdatePizza(pizza));
 app.MapDelete("/pizzas/{id}", (int id) => PizzaDB.RemovePizza(id));
 
